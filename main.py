@@ -1,6 +1,7 @@
 import regex
 import pandas as pd
-from datetime import datetime
+import datetime
+import os
 
 # List to store expenses
 expenses = []
@@ -122,7 +123,8 @@ def save_expenses():
     filename = "expenses.csv"
     df = pd.DataFrame(expenses)  # Convert the list of expenses to a DataFrame
     df.to_csv(filename, index=False)  # Save DataFrame to CSV without index
-    print("Expenses saved to file.")
+    file_path = os.path.abspath(filename)
+    print(f"Expenses saved to {file_path}")
 
 
 # Function to load expenses from a CSV file using pandas
@@ -132,9 +134,10 @@ def load_expenses():
         global expenses
         df = pd.read_csv(filename)  # Load the CSV file into a DataFrame
         expenses = df.to_dict('records')  # Convert DataFrame to a list of dictionaries
-        print("Expenses loaded from file.")
+        file_path = os.path.abspath(filename)
+        print(f"Expenses loaded from {file_path}")
     except FileNotFoundError:
-        print("No previous expenses found. Starting fresh.")
+        print("No previous expenses found.")
 
 
 # Main menu function
