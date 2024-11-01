@@ -1,6 +1,6 @@
 import regex
 import pandas as pd
-import datetime
+from datetime import datetime
 import os
 
 # List to store expenses
@@ -78,13 +78,14 @@ def input_expense():
 
 
 # View Expenses
-def view_expense():
+def view_expenses():
     i = 0
     for expense in expenses:
         i += 1
         desc = expense["description"];
         if desc == "":
             print(f"Expense No.: {i} missing required details, Skipping it")
+            continue
         else:
             print(f"Expense No.: {i} - {expense}")
 
@@ -161,7 +162,7 @@ def main():
         if choice == 1:
             input_expense()
         elif choice == 2:
-            view_expense()
+            view_expenses()
         elif choice == 3:
             track_budget()
         elif choice == 4:
